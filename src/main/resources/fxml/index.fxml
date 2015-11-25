@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<VBox
+    xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65"
+    fx:controller="de.ostmarkbeuthen.kasse.client.controllers.IndexController">
+  <Button fx:id="checkout" text="Kaufen" onAction="#handle"/>
+  <Button fx:id="deposit" text="Einzahlen" onAction="#handle"/>
+</VBox>
