@@ -7,4 +7,5 @@
     fx:controller="de.ostmarkbeuthen.kasse.client.controllers.IndexController">
   <Button fx:id="checkout" text="Kaufen" onAction="#handle"/>
   <Button fx:id="deposit" text="Einzahlen" onAction="#handle"/>
+  <Button fx:id="signup" text="Registrieren" onAction="#handle"/>
 </VBox>

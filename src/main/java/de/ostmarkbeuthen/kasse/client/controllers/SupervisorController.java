@@ -22,6 +22,8 @@ public class SupervisorController {
   final Stage stage;
   final Injector injector;
 
+
+
   public void switchView(String view) throws IOException {
 
     switchView(view, null);
@@ -30,7 +32,7 @@ public class SupervisorController {
 
   public void switchView(String view, Object userData) throws IOException {
 
-    FXMLLoader fxmlLoader = new FXMLLoader();
+    final FXMLLoader fxmlLoader = new FXMLLoader();
     fxmlLoader.setControllerFactory(injector::getInstance);
 
     URL url = classLoader.getResource(view);

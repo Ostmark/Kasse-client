@@ -24,21 +24,21 @@ public class EANBarcode {
     } else {
       countryCode = CountryCode.OTHER;
     }
-     valid = false;
+    valid = calculateCheckSum (barcode) == Character.getNumericValue(barcode.charAt(barcode.length() - 1));
   }
 
-  static int calculateCheckSum (String barcode) {
+  public static int calculateCheckSum (String barcode) {
     int checksum = 0;
 
     final String GTIN_PADDING = "00000000000000";
 
-    String GTIN = GTIN_PADDING.substring(GTIN_PADDING.length() - barcode.length()) + barcode;
-
-    for (int i = GTIN.length() - 1; i >= 0; i--) {
-
+    String GTIN = (GTIN_PADDING.substring(0, GTIN_PADDING.length() - barcode.length()) + barcode).substring(0, 14);
+    System.out.println(GTIN);
+    for (int i = 0; i < GTIN.length() - 1; i++) {
+      checksum += Character.getNumericValue(GTIN.charAt(i)) * ( (i%2 != 0) ? 1 : 3 );
     }
 
-    return checksum;
+    return (10 - checksum % 10) % 10;
   }
 
   @Override

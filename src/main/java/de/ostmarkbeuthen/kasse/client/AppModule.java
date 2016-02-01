@@ -1,7 +1,12 @@
 package de.ostmarkbeuthen.kasse.client;
 
 import com.google.inject.AbstractModule;
-import javafx.fxml.FXMLLoader;
+import de.ostmarkbeuthen.kasse.client.config.Server;
+import de.ostmarkbeuthen.kasse.client.config.factories.ServerFactory;
+import de.ostmarkbeuthen.kasse.client.models.Drink;
+import de.ostmarkbeuthen.kasse.client.models.DrinkStatic;
+import de.ostmarkbeuthen.kasse.client.models.factories.DrinkFactory;
+import de.ostmarkbeuthen.util.rest.exceptions.ExceptionFactory;
 import javafx.stage.Stage;
 
 /**
@@ -18,5 +23,9 @@ public class AppModule extends AbstractModule {
   protected void configure() {
     bind(ClassLoader.class).toInstance(getClass().getClassLoader());
     bind(Stage.class).toInstance(stage);
+    bind(Server.class).toProvider(ServerFactory.class);
+    //bind(DrinkFactory.class).toInstance(new DrinkFactory());
+    bind(DrinkStatic.class).toInstance(new DrinkStatic());
+    bind(ExceptionFactory.class).toInstance(new ExceptionFactory());
   }
 }

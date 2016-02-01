@@ -5,6 +5,7 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.request.BaseRequest;
+import de.ostmarkbeuthen.kasse.client.config.Server;
 import de.ostmarkbeuthen.util.PromiseUtil;
 import de.ostmarkbeuthen.util.rest.exceptions.NotFoundException;
 import org.jdeferred.impl.DeferredObject;
@@ -24,11 +25,15 @@ import javax.inject.Inject;
 public class DrinkFactory {
 
   @Inject
-  DrinkFactory() {
+  Server server;
+
+  @Inject
+  public DrinkFactory() {
   }
 
   public Promise<Drink, Exception, Void> getDrink(final String barcode) {
-    BaseRequest u = Unirest.get("http://localhost:8080/drink/{barcode}")
+    BaseRequest u = Unirest.get("{url}/drink/{barcode}")
+                        .routeParam("url", server.url)
                         .routeParam("barcode", barcode);
     return PromiseUtil.promisifyUnirest(u::asJsonAsync).then((HttpResponse<JsonNode> res) -> {
       Deferred<Drink, Exception, Void> d = new DeferredObject<>();
@@ -53,23 +58,24 @@ public class DrinkFactory {
   }
 
   public Promise<Drink, Exception, Void> createDrink(
-                                                        String barcode,
-                                                        String name,
-                                                        String amount,
-                                                        int cost) {
+    String barcode,
+    String name,
+    String amount,
+    int cost) {
 
-    JSONObject drink = new JSONObject();
-    drink.put("name", name);
-    drink.put("amount", amount);
-    drink.put("cost", cost);
-    BaseRequest req = Unirest.post("localhost:8080/{barcode}")
+    JSONObject drink = new JSONObject()
+      .put("name", name)
+      .put("amount", amount)
+      .put("cost", cost);
+    BaseRequest req = Unirest.post("{url}/drink/{barcode}")
+                          .routeParam("url", server.url)
                           .routeParam("barcode", barcode)
                           .body(new JsonNode(drink.toString()));
     return PromiseUtil.promisifyUnirest(req::asJsonAsync)
                .then((HttpResponse<JsonNode> res) -> new DrinkImpl(barcode, name, amount, cost));
   }
 
-  private class DrinkImpl extends Drink {
+  private class DrinkImpl implements Drink {
     public int getCost() {
       return cost;
     }

@@ -17,6 +17,8 @@ public class IndexController extends Controller {
   Button checkout;
   @FXML
   Button deposit;
+  @FXML
+  Button signup;
 
   @FXML
   protected void handle(ActionEvent event) {
