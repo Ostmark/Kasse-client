@@ -1,36 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ButtonType?>
-
 <?import javafx.scene.control.Button?>
-<GridPane hgap="10" vgap="10"
-          xmlns:fx="http://javafx.com/fxml/1"
-          xmlns="http://javafx.com/javafx/8.0.65"
-          fx:controller="de.ostmarkbeuthen.kasse.client.controllers.LoginController">
-  <Label
-      text="benutzer"
-      GridPane.columnIndex="0"
-      GridPane.rowIndex="0"
-      GridPane.halignment="RIGHT"/>
-  <TextField
-      fx:id="username"
-      GridPane.columnIndex="1"
-      GridPane.rowIndex="0"/>
-  <Label
-      text="passwort"
-      GridPane.columnIndex="0"
-      GridPane.rowIndex="1"
-      GridPane.halignment="RIGHT"/>
-  <PasswordField
-      fx:id="password"
-      GridPane.columnIndex="1"
-      GridPane.rowIndex="1"/>
-  <Button
-      text="einloggen"
-      onAction="#login"/>
+
+<GridPane hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.ostmarkbeuthen.kasse.client.controllers.LoginController">
+  <Label text="benutzer" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+  <TextField fx:id="username" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+  <Label text="passwort" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+  <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+  <Button onAction="#login" text="einloggen" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
 </GridPane>
